@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Log;
 
+use App\User;
+use App\Notifications\SlackNotification;
+
 class WordsController extends Controller
 {
     /**
@@ -27,6 +30,9 @@ class WordsController extends Controller
     public function store(Request $request)
     {
         \Log::info($request->text);
+        $user = new User();
+        // 対象にSlackメッセージ配信
+        $user->notify(new SlackNotification());
     }
 
     /**
