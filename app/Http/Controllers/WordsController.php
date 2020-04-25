@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Word;
 use Log;
 
 use App\User;
@@ -29,12 +30,20 @@ class WordsController extends Controller
      */
     public function store(Request $request)
     {
-        \Log::info($request->text);
-        $user = new User();
-        // 対象にSlackメッセージ配信
-        $user->notify(new SlackNotification());
+        if ($request->text == "ほめる") {
+            $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
+            $word = Word::findOrFail($word_id[0]['id']);
+            $user = new User();
+            $user->notify(new SlackNotification($word->word));
+        } elseif ($request->text == "はげます") {
+            $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
+            $word = Word::findOrFail($word_id[0]['id']);
+            $user = new User();
+            $user->notify(new SlackNotification($word->word));
+        }else {
+            return "自画自賛";
+        }
     }
-
     /**
      * Display the specified resource.
      *

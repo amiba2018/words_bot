@@ -13,7 +13,7 @@ class WordsTableSeeder extends Seeder
     public function run()
     {
         Word::create([
-            "word"  => '1:ごっつえやん！',
+            "word"  => '1:ごっつええやん！',
         ]);
 
         Word::create([

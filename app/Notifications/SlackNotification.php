@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\SlackMessage;
+use App\Word;
 
 class SlackNotification extends Notification
 {
@@ -14,15 +15,17 @@ class SlackNotification extends Notification
 
     protected $channel;
     protected $name;
+    protected $message;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($message = null)
     {
         $this->channel = env('SLACK_CHANNEL');
         $this->name = env('SLACK_NAME');
+        $this->message = $message;
     }
 
     /**
@@ -47,7 +50,7 @@ class SlackNotification extends Notification
         $message = (new SlackMessage)
             ->from($this->name)
             ->to($this->channel)
-            ->content('Slackへの通知テスト');
+            ->content($this->message);
  
         return $message;
     }
