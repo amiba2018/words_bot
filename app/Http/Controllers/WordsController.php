@@ -20,6 +20,7 @@ class WordsController extends Controller
     // public function index(Request $request)
     // {
     //     \Log::info($request);
+    //     \Log::debug($word->word);
     // }
 
     /**
@@ -34,12 +35,12 @@ class WordsController extends Controller
             $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
             $word = Word::findOrFail($word_id[0]['id']);
             $user = new User();
-            $user->notify(new SlackNotification($word->word));
+            $user->notify(new SlackNotification(mb_substr($word->word, 2)));
         } elseif ($request->text == "はげます") {
             $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
             $word = Word::findOrFail($word_id[0]['id']);
             $user = new User();
-            $user->notify(new SlackNotification($word->word));
+            $user->notify(new SlackNotification(mb_substr($word->word, 2)));
         }else {
             return "自画自賛";
         }
