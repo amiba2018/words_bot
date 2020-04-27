@@ -51,7 +51,6 @@ class SlackNotification extends Notification
             ->from($this->name)
             ->to($this->channel)
             ->content($this->message);
- 
         return $message;
     }
 

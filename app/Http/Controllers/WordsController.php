@@ -19,7 +19,8 @@ class WordsController extends Controller
      */
     // public function index(Request $request)
     // {
-    //     \Log::info($request);
+    //     dd($request->text);
+        // \Log::info($request->text);
     //     \Log::debug($word->word);
     // }
 
@@ -31,18 +32,40 @@ class WordsController extends Controller
      */
     public function store(Request $request)
     {
-        if ($request->text == "ほめる") {
-            $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
-            $word = Word::findOrFail($word_id[0]['id']);
-            $user = new User();
-            $user->notify(new SlackNotification(mb_substr($word->word, 2)));
-        } elseif ($request->text == "はげます") {
-            $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
-            $word = Word::findOrFail($word_id[0]['id']);
-            $user = new User();
-            $user->notify(new SlackNotification(mb_substr($word->word, 2)));
+        $existence = Word::jageExistMension($request);
+        if($existence) {
+            $mension = Word::getMension($request);
+            if (mb_strpos($request->text,"ほめる")!== false) {
+                $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
+                $word = Word::findOrFail($word_id[0]['id']);
+                $user = new User();
+                $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
+            } elseif ($request->text == "はげます") {
+                $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
+                $word = Word::findOrFail($word_id[0]['id']);
+                $user = new User();
+                $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
+            }else {
+                $word_id = Word::get(['id'])->random(1);
+                $word = Word::findOrFail($word_id[0]['id']);
+                return $mension .mb_substr($word->word, 2);
+            }
         }else {
-            return "自画自賛";
+            if (mb_strpos($request->text,"ほめる")!== false) {
+                $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
+                $word = Word::findOrFail($word_id[0]['id']);
+                $user = new User();
+                $user->notify(new SlackNotification(mb_substr($word->word, 2)));
+            } elseif ($request->text == "はげます") {
+                $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
+                $word = Word::findOrFail($word_id[0]['id']);
+                $user = new User();
+                $user->notify(new SlackNotification(mb_substr($word->word, 2)));
+            }else {
+                $word_id = Word::get(['id'])->random(1);
+                $word = Word::findOrFail($word_id[0]['id']);
+                return mb_substr($word->word, 2);
+            }
         }
     }
     /**
