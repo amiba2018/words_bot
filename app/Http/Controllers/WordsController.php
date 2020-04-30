@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\SlashCommandRequest;
 
 // use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -30,7 +31,7 @@ class WordsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(SlashCommandRequest $request)
     {
         $existence = Word::jageExistMension($request);
         if($existence) {
