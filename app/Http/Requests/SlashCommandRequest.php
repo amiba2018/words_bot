@@ -8,6 +8,9 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Word;
 use Log;
 
+use App\User;
+use App\Notifications\SlackNotification;
+
 class SlashCommandRequest extends FormRequest
 {
     /**
@@ -28,7 +31,7 @@ class SlashCommandRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required',
+            // 'text' => 'required',
         ];
     }
 
@@ -48,13 +51,8 @@ class SlashCommandRequest extends FormRequest
      */
     protected function failedValidation(Validator $validator): void
     {
-        $data = [
-            'data' => [],
-            'status' => 'error',
-            'summary' => 'Failed validation.',
-            'errors' => $validator->errors()->toArray(),
-        ];
-
-        throw new HttpResponseException(response()->json($data, 200));
+        $response['text'] = $validator->errors()->first();
+        $response["response_type"] = "ephemeral";
+        throw new HttpResponseException(response()->json($response, 200));
     }
 }
