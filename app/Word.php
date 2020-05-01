@@ -19,13 +19,13 @@ class Word extends Model
         }
         return true;
     }
-
+    //入力されたメンションを切り取って、取得する
     public static function getMention($request) {
-        $cut_position = mb_strpos($request->text, "<@");
-        $mension = mb_substr($request->text, $cut_position);
-        return $mension;
+        $left_cut_position = mb_strpos($request->text, "<@");
+        $right_cut_position = mb_strpos($request->text, ">") + 1;
+        $mention = mb_substr($request->text, $left_cut_position, $right_cut_position);
+        return $mention;
     }
-
     //発話された内容に従って、wordsテーブルからランダムなidを取得する
     public static function getRandomWordId($request, $mention=null) {
         if (mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
