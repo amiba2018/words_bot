@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 use App\Http\Requests\SlashCommandRequest;
 
-// use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Word;
-use Log;
-
 use App\User;
-use App\Notifications\SlackNotification;
+use Log;
 
 class WordsController extends Controller
 {
+    public const COMMAND_TYPE_COMPLIMENT = 'ほめる';
+    public const COMMAND_TYPE_YELL = 'はげます';
     /**
      * Display a listing of the resource.
      *
@@ -33,40 +32,14 @@ class WordsController extends Controller
      */
     public function store(SlashCommandRequest $request)
     {
-        $existence = Word::jageExistMension($request);
-        if($existence) {
-            $mension = Word::getMension($request);
-            if (mb_strpos($request->text,"ほめる")!== false) {
-                $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
-            } elseif ($request->text == "はげます") {
-                $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
-            }else {
-                $word_id = Word::get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                return $mension .mb_substr($word->word, 2);
-            }
+        $mention_existence = Word::isExistMention($request);
+        if($mention_existence) {
+            User::getWordSend($request);
         }else {
-            if (mb_strpos($request->text,"ほめる")!== false) {
-                $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification(mb_substr($word->word, 2)));
-            } elseif ($request->text == "はげます") {
-                $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification(mb_substr($word->word, 2)));
-            }else {
-                $word_id = Word::get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                return mb_substr($word->word, 2);
-            }
+            $word_id = Word::getRandomWordId($request);
+            $word = Word::findOrFail($word_id[0]['id']);
+            //メンションがない場合はスラッシュコマンドで返す
+            return mb_substr($word->word, 2);
         }
     }
     /**
