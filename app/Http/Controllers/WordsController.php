@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-// use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Word;
-use Log;
-
 use App\User;
-use App\Notifications\SlackNotification;
+use Log;
 
 class WordsController extends Controller
 {
@@ -34,17 +31,13 @@ class WordsController extends Controller
      */
     public function store(Request $request)
     {
-        $existence = Word::isExistMention($request);
-        if($existence) {
-            // $mension = Word::getMension($request);
-            // $word_id = Word::getRandomWordId($request, $mension);
-            // $word = Word::findOrFail($word_id[0]['id']);
-            // $user = new User();
-            // $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
-            User::getMessageSend ($request);
+        $mention_existence = Word::isExistMention($request);
+        if($mention_existence) {
+            User::getWordSend($request);
         }else {
             $word_id = Word::getRandomWordId($request);
             $word = Word::findOrFail($word_id[0]['id']);
+            //メンションがない場合はスラッシュコマンドで返す
             return mb_substr($word->word, 2);
         }
     }

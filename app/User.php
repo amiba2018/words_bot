@@ -39,8 +39,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function getMessageSend ($request) {
-        $mension = Word::getMension($request);
+    //メンションがある場合はwebhookで返す
+    public static function getWordSend($request) {
+        $mension = Word::getMention($request);
         $word_id = Word::getRandomWordId($request, $mension);
         $word = Word::findOrFail($word_id[0]['id']);
         $user = new User();

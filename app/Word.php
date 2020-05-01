@@ -20,20 +20,21 @@ class Word extends Model
         return true;
     }
 
-    public static function getMension($request) {
+    public static function getMention($request) {
         $cut_position = mb_strpos($request->text, "<@");
         $mension = mb_substr($request->text, $cut_position);
         return $mension;
     }
 
-    public static function getRandomWordId($request, $mension=null) {
+    //発話された内容に従って、wordsテーブルからランダムなidを取得する
+    public static function getRandomWordId($request, $mention=null) {
         if (mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
             $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
         }
         if (mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
             $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
         }
-        if ($request->text === $mension) {
+        if ($request->text === $mention) {
             $word_id = Word::get(['id'])->random(1);
         }
         return $word_id;
