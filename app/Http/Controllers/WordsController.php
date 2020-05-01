@@ -12,6 +12,8 @@ use App\Notifications\SlackNotification;
 
 class WordsController extends Controller
 {
+    public const COMMAND_TYPE_COMPLIMENT = 'ほめる';
+    public const COMMAND_TYPE_YELL = 'はげます';
     /**
      * Display a listing of the resource.
      *
@@ -32,40 +34,18 @@ class WordsController extends Controller
      */
     public function store(Request $request)
     {
-        $existence = Word::jageExistMension($request);
+        $existence = Word::isExistMention($request);
         if($existence) {
-            $mension = Word::getMension($request);
-            if (mb_strpos($request->text,"ほめる")!== false) {
-                $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
-            } elseif ($request->text == "はげます") {
-                $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
-            }else {
-                $word_id = Word::get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                return $mension .mb_substr($word->word, 2);
-            }
+            // $mension = Word::getMension($request);
+            // $word_id = Word::getRandomWordId($request, $mension);
+            // $word = Word::findOrFail($word_id[0]['id']);
+            // $user = new User();
+            // $user->notify(new SlackNotification($mension .mb_substr($word->word, 2)));
+            User::getMessageSend ($request);
         }else {
-            if (mb_strpos($request->text,"ほめる")!== false) {
-                $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification(mb_substr($word->word, 2)));
-            } elseif ($request->text == "はげます") {
-                $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                $user = new User();
-                $user->notify(new SlackNotification(mb_substr($word->word, 2)));
-            }else {
-                $word_id = Word::get(['id'])->random(1);
-                $word = Word::findOrFail($word_id[0]['id']);
-                return mb_substr($word->word, 2);
-            }
+            $word_id = Word::getRandomWordId($request);
+            $word = Word::findOrFail($word_id[0]['id']);
+            return mb_substr($word->word, 2);
         }
     }
     /**
