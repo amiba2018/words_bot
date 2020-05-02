@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\WordsController;
-use Log;
 
 class Word extends Model
 {
