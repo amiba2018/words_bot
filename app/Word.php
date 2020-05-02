@@ -4,16 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\WordsController;
-
+use App\Notifications\SlackNotification;
+use Log;
 class Word extends Model
 {
     protected $fillable = ['word'];
 
     public static function isExistMention($request) {
-        if (is_null($request->text)) {
+        if(is_null($request->text)) {
             return false;
         }
-        if (mb_strpos($request->text,"<@")===false) {
+        if(mb_strpos($request->text,"<@")===false) {
             return false;
         }
         return true;
@@ -27,15 +28,28 @@ class Word extends Model
     }
     //発話された内容に従って、wordsテーブルからランダムなidを取得する
     public static function getRandomWordId($request, $mention=null) {
-        if (mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
+        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
             $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
         }
-        if (mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
+        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
             $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
         }
-        if ($request->text === $mention) {
+        if($request->text === $mention) {
             $word_id = Word::get(['id'])->random(1);
         }
         return $word_id;
+    }
+    //発話された内容が正しい形式で入力されているかをチェック
+    public static function checkWordId($request, $mention=null) {
+        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
+            return true;
+        }
+        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
+            return true;
+        }
+        if($request->text === $mention) {
+            return true;
+        }
+        return false;
     }
 }
