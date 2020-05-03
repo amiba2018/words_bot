@@ -6,8 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Word;
-use Illuminate\Http\Request;
-use Log;
 
 use App\User;
 use App\Notifications\SlackNotification;
@@ -32,14 +30,7 @@ class SlashCommandRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'text' => 'required',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'text.required' => 'お名前を入力してください。',
+            //
         ];
     }
 
@@ -59,12 +50,18 @@ class SlashCommandRequest extends FormRequest
 
     public function withValidator(Validator $validator) {
         $validator->after(function ($validator) {
-            $check_request = $this->input('text');
-            // \Log::debug($request);
-            if($check_request === "ほめる") {
-                $validator->errors()->add('text', '既にログインしています。');
+            $request = $this->input();
+            $mention_existence = Word::isExistMention($request);
+            if($mention_existence) {
+                $mention = Word::getMention($request);
+                $check = Word::checkWordText($request, $mention);
+            }else {
+                $check = Word::checkWordText($request);
             }
-
+            if(!$check) {
+                $msg = "正しい形式で入力してください";
+                $validator->errors()->add('text', $msg);
+            }
         });
     }
 }

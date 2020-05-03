@@ -36,11 +36,6 @@ class WordsController extends Controller
         if($mention_existence) {
             User::getWordSend($request);
         }else {
-            $check = Word::checkWordId($request);
-            if(!$check) {
-                $msg = "正しい形式で入力してください";
-                return $msg;
-            }
             $word_id = Word::getRandomWordId($request);
             $word = Word::findOrFail($word_id[0]['id']);
             //メンションがない場合はスラッシュコマンドで返す

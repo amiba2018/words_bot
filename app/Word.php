@@ -11,19 +11,19 @@ class Word extends Model
     protected $fillable = ['word'];
 
     public static function isExistMention($request) {
-        if(is_null($request->text)) {
+        if(is_null($request['text'])) {
             return false;
         }
-        if(mb_strpos($request->text,"<@")===false) {
+        if(mb_strpos($request['text'],"<@")===false) {
             return false;
         }
         return true;
     }
     //入力されたメンションを切り取って、取得する
     public static function getMention($request) {
-        $left_cut_position = mb_strpos($request->text, "<@");
-        $right_cut_position = mb_strpos($request->text, ">") + 1;
-        $mention = mb_substr($request->text, $left_cut_position, $right_cut_position);
+        $left_cut_position = mb_strpos($request['text'], "<@");
+        $right_cut_position = mb_strpos($request['text'], ">") + 1;
+        $mention = mb_substr($request['text'], $left_cut_position, $right_cut_position);
         return $mention;
     }
     //発話された内容に従って、wordsテーブルからランダムなidを取得する
@@ -40,14 +40,14 @@ class Word extends Model
         return $word_id;
     }
     //発話された内容が正しい形式で入力されているかをチェック
-    public static function checkWordId($request, $mention=null) {
-        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
+    public static function checkWordText($request, $mention=null) {
+        if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
             return true;
         }
-        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
+        if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_YELL)!== false) {
             return true;
         }
-        if($request->text === $mention) {
+        if($request['text'] === $mention) {
             return true;
         }
         return false;
