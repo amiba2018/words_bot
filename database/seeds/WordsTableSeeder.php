@@ -30,7 +30,7 @@ class WordsTableSeeder extends Seeder
             ['word' => '3:大儀であった!', 'created_at' => $now, 'updated_at' => $now],
             ['word' => '3:あっぱれ!', 'created_at' => $now, 'updated_at' => $now],
             ['word' => '3:よきかな♪ よきかな♪', 'created_at' => $now, 'updated_at' => $now],
-            ['word' => '3:お主やりよるな', 'created_at' => $now, 'updated_at' => $now],
+            ['word' => '3:お主やりよるな！', 'created_at' => $now, 'updated_at' => $now],
             ['word' => '3:ほめてつかわす！！', 'created_at' => $now, 'updated_at' => $now],
         ];
         DB::table('words')->insert($data);
