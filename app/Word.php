@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\WordsController;
 use App\Notifications\SlackNotification;
-use Log;
+
 class Word extends Model
 {
     protected $fillable = ['word'];
@@ -29,10 +29,13 @@ class Word extends Model
     //発話された内容に従って、wordsテーブルからランダムなidを取得する
     public static function getRandomWordId($request, $mention=null) {
         if(mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
-            $word_id = Word::where('word', 'LIKE', "%1%")->get(['id'])->random(1);
+            $word_id = Word::where('word', 'LIKE', "%1:%")->get(['id'])->random(1);
         }
         if(mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
-            $word_id = Word::where('word', 'LIKE', "%2%")->get(['id'])->random(1);
+            $word_id = Word::where('word', 'LIKE', "%2:%")->get(['id'])->random(1);
+        }
+        if(mb_strpos($request->text,WordsController::COMMAND_TYPE_LORD)!== false) {
+            $word_id = Word::where('word', 'LIKE', "%3:%")->get(['id'])->random(1);
         }
         if($request->text === $mention) {
             $word_id = Word::get(['id'])->random(1);
@@ -45,6 +48,9 @@ class Word extends Model
             return true;
         }
         if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_YELL)!== false) {
+            return true;
+        }
+        if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_LORD)!== false) {
             return true;
         }
         if($request['text'] === $mention) {
