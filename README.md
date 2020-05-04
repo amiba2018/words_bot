@@ -1,78 +1,79 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+## ほめたれ！！
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+スラックを活用するコミュニティや職場において、"ほめたれ！！" は気軽にほめ合うことができます
 
-## About Laravel
+誰かをほめることに心理的ハードルを感じることはないでしょうか？
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+* なんてほめていいのか分からない
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* なんとなく照れ臭い
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+"ほめたれ！！" では、より簡単に、もっと楽しく、「ええやん!」を伝えます
 
-## Learning Laravel
+## アプリ機能
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. スラッシュコマンドで褒め言葉をランダムに送信
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+簡単なコマンドを入力するだけで、データベースからランダムなほめ言葉を自分や相手に返します。
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<img width="710" alt="スクリーンショット 2020-05-04 22 20 58" src="https://user-images.githubusercontent.com/54348732/80970076-92886c80-8e55-11ea-8ad6-6cdac56b68ed.png">
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
+と入力すると、、、
 
-## Contributing
+<img width="710" alt="スクリーンショット 2020-05-04 22 18 04" src="https://user-images.githubusercontent.com/54348732/80969908-53f2b200-8e55-11ea-94a0-61721f9b3878.png">
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+などと返ってきます(3回入力しました)
 
-## Code of Conduct
+### 2. コマンドのオプション機能の設定
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+コマンドには引数を渡すことができ、メンション（相手に通知を知らせる）や自分の好みに合わせたほめ方の種類を選択することができます
 
-## Security Vulnerabilities
+<img width="710" alt="スクリーンショット 2020-05-04 22 04 38" src="https://user-images.githubusercontent.com/54348732/80969334-628c9980-8e54-11ea-9cea-01eb1b9f375b.png">
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+<img width="710" alt="スクリーンショット 2020-05-04 22 08 41" src="https://user-images.githubusercontent.com/54348732/80969439-8fd94780-8e54-11ea-8c35-203eb98618d5.png">
+
+を入力すると、、
+
+<img width="710" alt="スクリーンショット 2020-05-04 22 05 54" src="https://user-images.githubusercontent.com/54348732/80969477-a089bd80-8e54-11ea-8e97-2d31b7f3b4d1.png">
+
+### 3. その他
+
++ バリデーション機能の実装
+
+指定の引数やメンション以外を入力すると、下記のように返ってきます。
+
+<img width="710" alt="スクリーンショット 2020-05-04 22 42 01" src="https://user-images.githubusercontent.com/54348732/80972023-8c47bf80-8e58-11ea-8c2e-1e40eb83b2be.png">
+
++ webhook による送信チャンネルの変更
+
+## 全体の流れ
+
+<img width="710" alt="スクリーンショット 2020-05-05 0 51 58" src="https://user-images.githubusercontent.com/54348732/80986006-ecdff800-8e6a-11ea-8f85-0bbdb13f4b7f.png">
+
+## こだわり、がんばったっこと
+
+* コマンドを打つだけで、簡単にほめることができて、ユーザーの手間を極力省きました。
+
+* 複数のオプションを設定することで、選択できるという"面白さ" も追加しました。
+
+* webhookを使用することで、指定チャンネルにもメッセージを送れるようにしました。
+
+
+
+
+## 開発環境
+
+* Laravel Framework 7.7.1
+
+* MariaDB 5.5.64
+
+* VSCode（Visual Studio Code）
+
+## 作者
+
+* SHINYA
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* MIT
