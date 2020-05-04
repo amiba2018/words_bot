@@ -48,7 +48,6 @@ class User extends Authenticatable
         $user->notify(new SlackNotification($mention .mb_substr($word->word, 2)));
     }
 
-
     public function routeNotificationForSlack($notification)
     {
         return env('SLACK_URL');
