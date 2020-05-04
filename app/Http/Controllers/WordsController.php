@@ -10,7 +10,8 @@ use App\User;
 class WordsController extends Controller
 {
     public const COMMAND_TYPE_COMPLIMENT = 'ほめる';
-    public const COMMAND_TYPE_YELL = 'はげます';
+    public const COMMAND_TYPE_YELL = '関西弁';
+    public const COMMAND_TYPE_LORD = '殿様';
 
     /**
      * Store a newly created resource in storage.

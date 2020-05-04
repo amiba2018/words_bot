@@ -24,8 +24,8 @@ class WordsTableSeeder extends Seeder
             ['word' => '2:ええやん!', 'created_at' => $now, 'updated_at' => $now],
             ['word' => '2:ごっつええやん!', 'created_at' => $now, 'updated_at' => $now],
             ['word' => '2:今日はどうしたん？えらいシュッとしているやん！', 'created_at' => $now, 'updated_at' => $now],
-            ['word' => '2:自分おもろいやつやな！', 'created_at' => $now, 'updated_at' => $now],
-            ['word' => '2:すてきやん', 'created_at' => $now, 'updated_at' => $now],
+            ['word' => '2:ほ、ほれてまうやろ！', 'created_at' => $now, 'updated_at' => $now],
+            ['word' => '2:すてきやん！', 'created_at' => $now, 'updated_at' => $now],
             //殿様
             ['word' => '3:大儀であった!', 'created_at' => $now, 'updated_at' => $now],
             ['word' => '3:あっぱれ!', 'created_at' => $now, 'updated_at' => $now],
