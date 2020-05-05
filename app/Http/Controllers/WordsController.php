@@ -19,7 +19,7 @@ class WordsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SlashCommandRequest $request)
+    public function slackMessageReturn(SlashCommandRequest $request)
     {
         $mention_existence = Word::isExistMention($request);
         if($mention_existence) {
