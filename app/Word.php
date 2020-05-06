@@ -29,18 +29,18 @@ class Word extends Model
     //発話された内容に従って、wordsテーブルからランダムなidを取得する
     public static function getRandomWordId($request, $mention=null) {
         if(mb_strpos($request->text,WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
-            $word_id = Word::where('word', 'LIKE', "%1:%")->get(['id'])->random(1);
+            $word_ids = Word::where('word', 'LIKE', "%1:%")->get(['id'])->random(1);
         }
         if(mb_strpos($request->text,WordsController::COMMAND_TYPE_YELL)!== false) {
-            $word_id = Word::where('word', 'LIKE', "%2:%")->get(['id'])->random(1);
+            $word_ids = Word::where('word', 'LIKE', "%2:%")->get(['id'])->random(1);
         }
         if(mb_strpos($request->text,WordsController::COMMAND_TYPE_LORD)!== false) {
-            $word_id = Word::where('word', 'LIKE', "%3:%")->get(['id'])->random(1);
+            $word_ids = Word::where('word', 'LIKE', "%3:%")->get(['id'])->random(1);
         }
         if($request->text === $mention) {
-            $word_id = Word::get(['id'])->random(1);
+            $word_ids = Word::get(['id'])->random(1);
         }
-        return $word_id;
+        return $word_ids;
     }
     //発話された内容が正しい形式で入力されているかをチェック
     public static function checkWordText($request, $mention=null) {

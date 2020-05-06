@@ -15,8 +15,8 @@ class User extends Authenticatable
     //メンションがある場合はwebhookで返す
     public static function getWordSend($request) {
         $mention = Word::getMention($request);
-        $word_id = Word::getRandomWordId($request, $mention);
-        $word = Word::findOrFail($word_id[0]['id']);
+        $word_ids = Word::getRandomWordId($request, $mention);
+        $word = Word::findOrFail($word_ids[0]['id']);
         $user = new User();
         $user->notify(new SlackNotification($mention .mb_substr($word->word, 2)));
     }

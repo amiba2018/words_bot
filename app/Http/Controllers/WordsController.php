@@ -25,8 +25,8 @@ class WordsController extends Controller
         if($mention_existence) {
             User::getWordSend($request);
         }else {
-            $word_id = Word::getRandomWordId($request);
-            $word = Word::findOrFail($word_id[0]['id']);
+            $word_ids = Word::getRandomWordId($request);
+            $word = Word::findOrFail($word_ids[0]['id']);
             //メンションがない場合はスラッシュコマンドで返す
             return mb_substr($word->word, 2);
         }
