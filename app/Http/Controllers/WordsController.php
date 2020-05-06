@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Requests\SlashCommandRequest;
 
+use App\Http\Requests\SlashCommandRequest;
 use Illuminate\Http\Request;
 use App\Word;
 use App\User;
