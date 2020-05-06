@@ -14,6 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['middleware' => ['api']], function(){
-    Route::resource('words', 'WordsController', ['only' => ['store']]);
-});
+Route::post('words', 'WordsController@slackMessageReturn')->name('post.slackMessageReturn');
