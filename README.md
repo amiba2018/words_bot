@@ -23,7 +23,7 @@
 
 <img width="710" alt="スクリーンショット 2020-05-04 22 18 04" src="https://user-images.githubusercontent.com/54348732/80969908-53f2b200-8e55-11ea-94a0-61721f9b3878.png">
 
-などと返ってきます(3回入力しました)
+と返ってきます(3回入力しました↑)
 
 ### 2. コマンドのオプション機能の設定
 
@@ -33,7 +33,7 @@
 
 <img width="710" alt="スクリーンショット 2020-05-04 22 08 41" src="https://user-images.githubusercontent.com/54348732/80969439-8fd94780-8e54-11ea-8c35-203eb98618d5.png">
 
-を入力すると、、
+と入力すると、、
 
 <img width="710" alt="スクリーンショット 2020-05-04 22 05 54" src="https://user-images.githubusercontent.com/54348732/80969477-a089bd80-8e54-11ea-8e97-2d31b7f3b4d1.png">
 

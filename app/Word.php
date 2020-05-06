@@ -42,20 +42,4 @@ class Word extends Model
         }
         return $word_ids;
     }
-    //発話された内容が正しい形式で入力されているかをチェック
-    public static function checkWordText($request, $mention=null) {
-        if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
-            return true;
-        }
-        if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_YELL)!== false) {
-            return true;
-        }
-        if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_LORD)!== false) {
-            return true;
-        }
-        if($request['text'] === $mention) {
-            return true;
-        }
-        return false;
-    }
 }
