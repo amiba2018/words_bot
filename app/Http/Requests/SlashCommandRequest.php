@@ -42,9 +42,9 @@ class SlashCommandRequest extends FormRequest
             $mention_existence = Word::isExistMention($request);
             if($mention_existence) {
                 $mention = Word::getMention($request);
-                $check = self::checkWordText($request, $mention);
+                $check = $this->checkWordText($request, $mention);
             }else {
-                $check = self::checkWordText($request);
+                $check = $this->checkWordText($request);
             }
             if(!$check) {
                 $msg = "正しい形式で入力してください";
@@ -54,7 +54,7 @@ class SlashCommandRequest extends FormRequest
     }
 
     //発話された内容が正しい形式で入力されているかをチェック
-    private static function checkWordText($request, $mention=null) {
+    private function checkWordText($request, $mention=null) {
         if(mb_strpos($request['text'],WordsController::COMMAND_TYPE_COMPLIMENT)!== false) {
             return true;
         }
